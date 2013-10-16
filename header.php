@@ -35,7 +35,7 @@
 		</nav> --><!-- #site-navigation -->
 
 	<nav class="main-nav">
-		<a href="#"></a>
+		<a href="#">Home</a>
 		<a href="#"></a>
 		<a href="#"></a>
 		<a href="#"></a>
