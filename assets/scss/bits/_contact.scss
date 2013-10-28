@@ -1,0 +1,98 @@
+.gform_wrapper ul {
+ 
+}
+
+.gform_wrapper {
+
+  ul {
+    padding:0;
+    margin:0;
+    list-style-type: none;
+
+  }
+  label {
+    font-weight: normal;
+  }
+
+  li {
+    @extend .form-group;
+  }
+
+  .ginput_container input,
+  .ginput_container select,
+  .ginput_container textarea {
+      @extend .form-control;
+  }
+
+  input[type="submit"] {
+  @extend .btn;
+  @extend .btn-primary;
+  }
+
+}
+
+.contact-main {
+  @media (min-width: $screen-md) {
+    width: 65%;
+    float: right;
+  }
+}
+
+.contact-aside {
+
+   .contact-profile {
+      margin: 0em 1em 1em 0em;
+      float: left;
+    }
+
+  .social-media {
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      margin-right: 0.35em;
+      text-align: center;
+      &:last-child {
+        margin:0;
+      }
+      a {
+        width: 50px;
+        height: 50px;
+        border-radius: 100px;
+        font-family: "FontAwesome";
+        color: $w;
+        display: block;
+        line-height: 50px;
+        font-size: 1.4em;
+        &.twitter {
+          background: #4099FF;
+          &:before {content: "\f099";}
+        }
+        &.skype {
+          background: #00b0f6;
+          &:before {content: "\f17e";}
+        }
+         &.github {
+          background: #000000;
+          &:before {content: "\f113";}
+        }
+         &.google {
+          background: #dd4b39;
+          &:before {content: "\f0d5";}
+        }
+      }
+    }
+  }
+
+    @media (min-width: $screen-md) {
+    width: 35%;
+    padding-right: 2em;
+    float: left;
+     .contact-profile {
+      margin: 0em 0em 1em 0em;
+      float: none;
+    }
+  }
+
+}
+

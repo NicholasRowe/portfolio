@@ -10,15 +10,17 @@
 
 	</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<?php do_action( 'nick_credits' ); ?>
-			<a href="http://wordpress.org/" rel="generator"><?php printf( __( 'Proudly powered by %s', 'nick' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', 'nick' ), 'nick', '<a href="http://underscores.me/" rel="designer">Underscores.me</a>' ); ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
+			<footer id="colophon" class="site-footer" role="contentinfo">
+				<div class="site-info">
+				<p>
+					Design and Developed by Nicholas Rowe. <br/>Made with <a href="http://www.wordpress.org">WordPress</a>.
+				</p>
+			</div><!-- .site-info -->
+			</footer><!-- #colophon -->
+		</div>
+	</div><!-- #site-container -->
 </div><!-- #page -->
+
 
 <?php wp_footer(); ?>
 

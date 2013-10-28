@@ -1,62 +1,75 @@
 <?php
 /**
- * @package nick
- */
+* @package nick
+*/
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
 
-		<div class="entry-meta">
-			<?php nick_posted_on(); ?>
-		</div><!-- .entry-meta -->
-	</header><!-- .entry-header -->
+	<h1 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 
-	<div class="entry-content">
-		<?php the_content(); ?>
-		<?php
+	<ul class="entry-meta"><!-- .entry-meta -->
+		<?php if ( 'post' == get_post_type() ) : ?>
+			<li class="posted-on">
+				<i class="fa fa-clock-o"></i> <?php the_time('jS F Y') ?>
+			</li>
+		<?php endif; ?>
+
+		<?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
+			<?php
+			/* translators: used between list items, there is a space after the comma */
+			$categories_list = get_the_category_list( __( ', ', 'nick' ) );
+			if ( $categories_list && nick_categorized_blog() ) :
+				?>
+			<li class="cat-links">
+				<i class="fa fa-tags"></i> <?php printf( __( '%1$s', 'nick' ), $categories_list ); ?>
+			</span>
+		<?php endif; // End if categories ?>
+
+		<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
+
+			<li class="comments-link">
+
+				<i class="fa fa-comment"></i> <?php comments_popup_link( __( 'Leave a comment', 'nick' ), __( '1 Comment', 'nick' ), __( '% Comments', 'nick' ) ); ?></span>
+
+			<?php endif; ?>
+
+
+		<?php endif; // End if 'post' == get_post_type() ?>
+
+
+	</ul><!-- .entry-meta -->
+
+
+	<?php if ( is_search() ) : // Only display Excerpts for Search ?>
+		<div class="entry-summary">
+			<?php the_excerpt(); ?>
+		</div><!-- .entry-summary -->
+	<?php else : ?>
+		<div class="entry-content">
+
+
+
+			<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'nick' ) ); ?>
+			<?php
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . __( 'Pages:', 'nick' ),
 				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .entry-content -->
+				) );
+				?>
+			</div><!-- .entry-content -->
+		<?php endif; ?>
 
-	<footer class="entry-meta">
 		<?php
-			/* translators: used between list items, there is a space after the comma */
-			$category_list = get_the_category_list( __( ', ', 'nick' ) );
+		if( has_tag() ) { 
+			?>
+			<div class="tags"> <p>
 
-			/* translators: used between list items, there is a space after the comma */
-			$tag_list = get_the_tag_list( '', __( ', ', 'nick' ) );
+			<?php the_tags('<span class="label label-primary">', '</span><span class="label label-primary">', '</span>'); ?>
 
-			if ( ! nick_categorized_blog() ) {
-				// This blog only has 1 category so we just need to worry about tags in the meta text
-				if ( '' != $tag_list ) {
-					$meta_text = __( 'This entry was tagged %2$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'nick' );
-				} else {
-					$meta_text = __( 'Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'nick' );
-				}
+			</p></div>
 
-			} else {
-				// But this blog has loads of categories so we should probably display them here
-				if ( '' != $tag_list ) {
-					$meta_text = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'nick' );
-				} else {
-					$meta_text = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'nick' );
-				}
+				<?php } ?>
 
-			} // end check for categories on this blog
 
-			printf(
-				$meta_text,
-				$category_list,
-				$tag_list,
-				get_permalink()
-			);
-		?>
-
-		<?php edit_post_link( __( 'Edit', 'nick' ), '<span class="edit-link">', '</span>' ); ?>
-	</footer><!-- .entry-meta -->
-</article><!-- #post-## -->
+			</article><!-- #post-## -->
